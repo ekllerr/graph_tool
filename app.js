@@ -24,3 +24,5 @@ export const nodeRadius = 10;
 export const graph = new Graph();
 
 setUpEventListeners(canvas);
+
+graph.getAdjacencyMatrix
