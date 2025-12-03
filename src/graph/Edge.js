@@ -155,17 +155,17 @@ export class Edge {
 
         const arrowTip = {
             x: mid.x,
-            y: mid.y + 2 * r
+            y: direction > 0 ?  mid.y + 2 * r : mid.y - 2 * r
         }
 
         const p1 = {
             x: mid.x - r * Math.sqrt(3),
-            y: mid.y - r
+            y: direction > 0 ? mid.y - r : mid.y + r
         };
 
         const p2 = {
             x: mid.x + r * Math.sqrt(3),
-            y: mid.y - r
+            y: direction > 0 ? mid.y - r : mid.y + r
         };
 
 
