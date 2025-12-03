@@ -110,3 +110,15 @@ export function loadGraphByJson(e){
     };
     reader.readAsText(file);
 }
+
+export function downloadMatrix(){
+    const matrixData = graph.getAdjacencyMatrix().data;
+    const csv = matrixData.map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv],{type: "data:text/csv;charset=utf-8,"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "matrix.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}

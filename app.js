@@ -8,6 +8,7 @@ export const identifierInput = document.getElementById("nodeIdentifier");
 export const saveGraphButton = document.getElementById("saveGraph");
 export const loadGraphInput = document.getElementById("loadGraph");
 export const clearGraphButton = document.getElementById("clearGraph");
+export const saveMatrixButton = document.getElementById("saveMatrix");
 
 export const toggleEdgeDirectionInput = document.getElementById("toggleEdgeDirection");
 
@@ -24,4 +25,5 @@ export const nodeRadius = 10;
 export const graph = new Graph();
 
 setUpEventListeners(canvas);
+
 

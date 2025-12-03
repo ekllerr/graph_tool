@@ -1,6 +1,6 @@
 
-import {graph, canvas, identifierInput, saveGraphButton, loadGraphInput, clearGraphButton, toggleEdgeDirectionInput} from "../../app.js";
-import {findClickedNode, isCursorOnEdge, downloadGraphJson, loadGraphByJson} from "./helpers.js";
+import {graph, canvas, identifierInput, saveGraphButton, loadGraphInput, clearGraphButton, toggleEdgeDirectionInput, saveMatrixButton} from "../../app.js";
+import {findClickedNode, isCursorOnEdge, downloadGraphJson, loadGraphByJson, downloadMatrix} from "./helpers.js";
 
 
 
@@ -55,6 +55,9 @@ function setUpInputsListeners(){
         graph.redrawGraph();
     });
 
+    saveMatrixButton.addEventListener("click", () => {
+        downloadMatrix();
+    })
 
 }
 

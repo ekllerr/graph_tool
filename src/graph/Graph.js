@@ -4,19 +4,16 @@ import {clearCanvas} from "../utils/helpers.js";
 import { Matrix } from "./matrix.js";
 
 export class Graph{
-    #matrix
-    #nodes
-    #edges
 
     constructor(){
         this.nodes = [];
         this.edges = [];
+        this.matrix = null;
 
         this.selectedNode = null;
         this.draggingNode = null;
         this.justDragged = false;
         this.tempEdge = null;
-        this.matrix = null;
     }
 
 
