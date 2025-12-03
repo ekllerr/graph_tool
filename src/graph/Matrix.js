@@ -6,6 +6,6 @@ export class Matrix{
     }
 
     length(){
-        return this.data.length();
+        return this.data.length;
     }
 }

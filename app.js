@@ -25,4 +25,3 @@ export const graph = new Graph();
 
 setUpEventListeners(canvas);
 
-graph.getAdjacencyMatrix

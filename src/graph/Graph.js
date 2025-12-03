@@ -1,8 +1,13 @@
 import {Node} from "./Node.js";
 import {Edge} from "./Edge.js";
 import {clearCanvas} from "../utils/helpers.js";
+import { Matrix } from "./matrix.js";
 
 export class Graph{
+    #matrix
+    #nodes
+    #edges
+
     constructor(){
         this.nodes = [];
         this.edges = [];
@@ -11,7 +16,9 @@ export class Graph{
         this.draggingNode = null;
         this.justDragged = false;
         this.tempEdge = null;
+        this.matrix = null;
     }
+
 
     addNode(x,y,number=null,label=null){
         if(!number){
@@ -158,9 +165,37 @@ export class Graph{
         return label;
     }
 
+    generateMatrix(){
+        const data = [];
+
+        for(let i = 0; i < this.nodes.length; i++){
+            const row = [];
+            for(let j = 0; j < this.nodes.length; j++)
+                row.push(0);
+                
+            data.push(row);
+        }
+
+        for(let i = 0; i < this.edges.length; i++){
+            const edge = this.edges[i];
+
+            const fromIndex = edge.fromNode.number - 1;
+            const toIndex = edge.toNode.number - 1;
+
+            if(fromIndex === toIndex)
+                data[fromIndex][toIndex]++
+            else{
+                data[fromIndex][toIndex]++;
+                data[toIndex][fromIndex]++;
+            }
+        }
+
+        this.matrix = new Matrix(data);
+    }
+
     getAdjacencyMatrix(){
-        console.log(this.nodes);
-        console.log(this.edges);
+        this.generateMatrix();
+        return this.matrix;
     }
 
     saveToJson(){
