@@ -158,6 +158,11 @@ export class Graph{
         return label;
     }
 
+    getAdjacencyMatrix(){
+        console.log(this.nodes);
+        console.log(this.edges);
+    }
+
     saveToJson(){
         const data = {
             nodes: this.nodes.map(node => ({

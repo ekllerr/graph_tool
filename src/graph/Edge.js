@@ -90,7 +90,11 @@ export class Edge {
     }
 
     drawArrow(){
-        if(this.fromNode === this.toNode) return;
+        if(this.fromNode === this.toNode){
+            this.drawArrowOnLoop();
+            return;
+        }
+
         const start = {
             x: this.fromNode.x,
             y: this.fromNode.y
@@ -128,13 +132,61 @@ export class Edge {
         ctx.moveTo(mid.x, mid.y);
         ctx.lineTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
-        ctx.closePath()
+        ctx.closePath();
         ctx.fill();
 
     }
 
+
+    drawArrowOnLoop(){
+        const direction = this.offset >= 0 ? 1 : -1;
+        
+        console.log("drawing arrow on a loop, direction: " + direction);
+
+        const start = {
+            x: this.fromNode.x,
+            y: this.fromNode.y
+        }
+
+        const mid = this.calculateControlPointForLoop(start, this.offset);
+
+        const arrowSize = 8;
+        const r = arrowSize/3;
+
+        const arrowTip = {
+            x: mid.x,
+            y: mid.y + 2 * r
+        }
+
+        const p1 = {
+            x: mid.x - r * Math.sqrt(3),
+            y: mid.y - r
+        };
+
+        const p2 = {
+            x: mid.x + r * Math.sqrt(3),
+            y: mid.y - r
+        };
+
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(arrowTip.x, arrowTip.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.lineTo(arrowTip.x, arrowTip.y);
+
+        ctx.fill();
+
+        ctx.closePath();
+
+    }
+
     calculateControlPoint(start,end,offset){
-        if(start.x === end.x && start.y === end.y) return;
+        if(start.x === end.x && start.y === end.y){
+            return this.calculateControlPointForLoop(start,offset);
+        }
         const mid = {x: (start.x + end.x) / 2,y: (start.y + end.y) / 2};
 
         const vector = {x: end.x - start.x, y: end.y - start.y};
@@ -145,6 +197,24 @@ export class Edge {
             x: mid.x + normalizedVector.x * offset,
             y: mid.y + normalizedVector.y * offset
         };
+    }
+
+    calculateControlPointForLoop(start,offset){
+        const loopRadius = this.offset === 0 ? nodeRadius * 1.5 : nodeRadius + Math.abs(this.offset/2);
+        const direction = this.offset >= 0 ? 1 : -1;
+
+        const mid = {
+            x: start.x  + loopRadius*2 * direction,
+            y: start.y,
+        }
+
+        /* ctx.beginPath();
+        ctx.arc(mid.x, mid.y, 3, 0, 2 * Math.PI);
+        ctx.fillStyle = 'red';
+        ctx.fill();
+        ctx.fillStyle = 'black'; */
+
+        return mid;
     }
 
     normalizeVector(vector) {
