@@ -52,12 +52,9 @@ function isCursorOnLoop(edge,cursor,threshold){
 
     // Check if the angle is within the loop's drawn segments
     if (edge.offset >= 0) {
-        console.log( (startAnglePos1 <= thetaClick && thetaClick <= endAnglePos1) ||
-            (startAnglePos2 <= thetaClick && thetaClick <= endAnglePos2));
         return (startAnglePos1 <= thetaClick && thetaClick <= endAnglePos1) ||
             (startAnglePos2 <= thetaClick && thetaClick <= endAnglePos2);
     } else {
-        console.log(startAngleNeg <= thetaClick && thetaClick <= endAngleNeg    )
         return startAngleNeg <= thetaClick && thetaClick <= endAngleNeg;
     }
 }

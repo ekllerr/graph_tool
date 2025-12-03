@@ -139,9 +139,9 @@ export class Edge {
 
 
     drawArrowOnLoop(){
-        const direction = this.offset >= 0 ? 1 : -1;
-        
-        console.log("drawing arrow on a loop, direction: " + direction);
+        let direction = this.offset >= 0 ? 1 : -1;
+
+        if(this.isDirected=== 'reverse') direction *= -1;
 
         const start = {
             x: this.fromNode.x,

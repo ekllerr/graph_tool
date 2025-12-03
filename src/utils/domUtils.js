@@ -72,8 +72,12 @@ function handleCanvasClick(e){
             }
             if(edge.isDirected === 'directed'){
                 edge.isDirected = 'reverse';
-                [edge.fromNode, edge.toNode] = [edge.toNode, edge.fromNode];
-                edge.offset *= -1;
+                
+                if(edge.fromNode !== edge.toNode){
+                    [edge.fromNode, edge.toNode] = [edge.toNode, edge.fromNode];
+                    edge.offset *= -1;
+                }
+
                 graph.redrawGraph();
                 return;
             }
